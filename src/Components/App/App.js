@@ -1,13 +1,11 @@
 import React from 'react';
 import './App.css';
-
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
-import Tracklist from '../TrackList/TrackList';
 
-const playlistName = 'Listen up!';
-const playlistTracks = [
+
+const sampleTracks = [
        {name:'I', artist:'am', album:'Me', id:123} ,
        {name:'You', artist:'are', album:'You', id:234} ,
        {name:'We', artist:'are', album:'People', id:345} ];
@@ -15,19 +13,21 @@ const playlistTracks = [
        //{name:'Prrrprrr', artist:'Azrael', album:'Ik ben de baas', id:1234} ,
        //{name:'Miaaauw', artist:'Zsazsa', album:'Miauw', id:1345}],
 
+
+
 class App extends React.Component {
   constructor(props){
     super(props);
-    this.addTrack = this.addTrack.bind(this);
-    this.removeTrack = this.removeTrack.bind(this);
-    this.updatePlaylistName = this.updatePlaylistName.bind(this);
-    this.savePlaylist = this.savePlaylist.bind(this);
-    this.search = this.search.bind(this);
-    this.state = {
-            searchResults: [],
+      this.state = {
+            searchResults: sampleTracks,
             playlistName: "New Playlist",
-            playlistTracks:[]};
-
+            playlistTracks: sampleTracks,
+         };
+     this.addTrack = this.addTrack.bind(this);
+     this.removeTrack = this.removeTrack.bind(this);
+     this.updatePlaylistName = this.updatePlaylistName.bind(this);
+     //this.savePlaylist = this.savePlaylist.bind(this);
+     this.search = this.search.bind(this);
 
 
   }
@@ -37,20 +37,20 @@ class App extends React.Component {
 
     }
   }
-
+  //complete
   removeTrack(track){
     let newPlayListTracks = this.state.playlistTracks.filter(playlistTracks => playlistTracks.id !== track.id);
     this.setState({playlistTracks: newPlayListTracks});
   }
-
+  //complete
   updatePlaylistName(newName) {
     this.setState({playlistName: newName});
   }
-
+/*
   savePlaylist(){
     let trackURIs = this.state.playlistTracks.map(track => track.uri);
   }
-
+*/
   search(searchTerm) {
     console.log(searchTerm);
   }
@@ -63,10 +63,10 @@ class App extends React.Component {
             <SearchBar
                   onSearch={this.search} />
           <div className="App-playlist">
-            <SearchResults searchResults={this.searchResults} />
+            <SearchResults searchResults={this.state.searchResults} />
             <Playlist
                   playlistName={this.playlistName}
-                  playlistTracks={this.playlistTracks}
+                  playlistTracks={this.state.playlistTracks}
                   onNamechange={this.updatePlaylistName}
                   onSave={this.savePlaylist}  />
 

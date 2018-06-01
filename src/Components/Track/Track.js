@@ -31,14 +31,14 @@ class Track extends React.Component {
 
 
   render(){
+    const trackProps = this.props.track;
     return (
       <div className="Track">
         <div className="Track-information">
-
-        <h3>{this.props.track.name}</h3>
-        <p>{this.props.track.artist} | {this.props.track.album}</p>
+        <h3>{trackProps.title}</h3>
+        <p>{trackProps.artist} | {trackProps.album}</p>
         </div>
-       //<a className="Track-action" onClick={this.addTrack}>!-- + or - will go here --</a>
+
       </div>
     );
   }
